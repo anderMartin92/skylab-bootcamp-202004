@@ -33,7 +33,7 @@ body {
   display: flex;
   list-style: none;
 }
-.toplinks__group1-item {
+.toplinks__img {
   border: 2px solid black;
   padding: 2px;
 }
@@ -41,30 +41,6 @@ body {
   list-style: none;
   display: flex;
   align-content: flex-end;
-}
-.toplinks__group2-enter {
-  border: 2px solid black;
-  padding: 2px;
-}
-.toplinks__group2-twiter {
-  border: 2px solid black;
-  padding: 2px;
-}
-.toplinks__group2-insta {
-  border: 2px solid black;
-  padding: 2px;
-}
-.toplinks__group2-youtube {
-  border: 2px solid black;
-  padding: 2px;
-}
-.toplinks__group2-user {
-  border: 2px solid black;
-  padding: 2px;
-}
-.toplinks__group2-basket {
-  border: 2px solid black;
-  padding: 2px;
 }
 
 .header {
@@ -101,19 +77,7 @@ body {
   display: flex;
   align-items: center;
 }
-.header__search-news {
-  border: 2px solid black;
-  padding: 4px;
-}
-.header__search-offer {
-  border: 2px solid black;
-  padding: 4px;
-}
-.header__search-input {
-  border: 2px solid black;
-  padding: 4px;
-}
-.header__search-serch {
+.header__borderpadding {
   border: 2px solid black;
   padding: 4px;
 }
@@ -402,7 +366,7 @@ body {
   }
   .header__lunarillos-img {
     width: 250px;
-    height: 58px;
+    eight: 58px;
   }
   .header__articles-img {
     width: 80px;

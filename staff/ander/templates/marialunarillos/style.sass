@@ -16,6 +16,8 @@
 =sizeBlogImg()
     width: 350px 
     height: 525px
+
+$border2px: 2px solid black
 *
     font-size:20px
     margin: 0
@@ -28,7 +30,7 @@ body
     display: grid
     grid-template-columns:1fr 8fr 1fr
     grid-template-rows: 0.1fr 0.2fr 10fr 0.1fr
-    border: 2px solid black
+    border: $border2px
     padding: 4px
     background-color: red
 .toplinks
@@ -43,31 +45,14 @@ body
     &__group1
         display: flex
         list-style: none
-        &-item
-            border: 2px solid black
-            padding: 2px
+    &__img
+        border: $border2px
+        padding: 2px
     &__group2
         list-style: none
         display: flex
         align-content: flex-end
-        &-enter
-            border: 2px solid black
-            padding: 2px
-        &-twiter
-            border: 2px solid black
-            padding: 2px
-        &-insta
-            border: 2px solid black
-            padding: 2px
-        &-youtube
-            border: 2px solid black
-            padding: 2px
-        &-user
-            border: 2px solid black
-            padding: 2px
-        &-basket
-            border: 2px solid black
-            padding: 2px
+
 .header
     display: grid
     grid-column: 2
@@ -95,18 +80,10 @@ body
         grid-row: 1
         display: flex
         align-items: center
-        &-news
-            border:2px solid black
-            padding: 4px
-        &-offer
-            border:2px solid black
-            padding: 4px
-        &-input
-            border:2px solid black
-            padding: 4px
-        &-serch
-            border:2px solid black
-            padding: 4px
+    &__borderpadding
+        border: $border2px
+        padding: 4px
+      
 .main
     grid-column: 2
     grid-row: 3
