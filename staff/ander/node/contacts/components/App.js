@@ -1,6 +1,5 @@
 const AddContact = require('./AddContact')
 const ListContacts = require('./ListContacts')
-const SearchContacts = require('./SearchContacts')
 const Landing = require('./Landing')
 const Feedback = require('./Feedback')
 const style = require('./App.style')
@@ -23,12 +22,6 @@ module.exports = () => {
                 })
             else if (option === 'list contacts')
                 ListContacts(error => {
-                    if (error) return Feedback(error.message, 'error')
-        
-                    loop()
-                })
-            else if (option === 'search users')
-                SearchContacts(error => {
                     if (error) return Feedback(error.message, 'error')
         
                     loop()

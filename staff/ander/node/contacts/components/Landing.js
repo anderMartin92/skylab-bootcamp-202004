@@ -2,7 +2,7 @@ const readline = require('readline')
 const Feedback = require('./Feedback')
 const style = require('./Landing.style')
 
-function Landing(callback) {
+function AddContact(callback) {
     console.log(style.color, '=======')
     console.log(style.color, 'Landing')
     console.log(style.color, '=======')
@@ -17,9 +17,8 @@ function Landing(callback) {
         interface.question(`Choose an option:
 - add contact
 - list contacts
-- search users
 `, value => {
-            if (value.trim() !== 'add contact' && value.trim() !== 'list contacts' && value.trim() !== 'search users') {
+            if (value.trim() !== 'add contact' && value.trim() !== 'list contacts') {
                 Feedback('invalid option', 'error')
 
                 chooseAnOption()
@@ -32,4 +31,4 @@ function Landing(callback) {
     })()
 }
 
-module.exports = Landing
+module.exports = AddContact
