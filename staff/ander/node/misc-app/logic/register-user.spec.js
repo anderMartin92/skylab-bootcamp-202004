@@ -43,7 +43,7 @@ describe.only('registerUser', () => {
         })
     })
     
-    after(done => {
+    /* after(done => {
         
          fs.unlink(path.join(__dirname, '..', 'data', 'users', `${id}.json`),(error)=>{
             if(error){
@@ -53,7 +53,7 @@ describe.only('registerUser', () => {
             }   
         })
         done()
-    })
+    }) */
     
     
     // TODO clean data (on after)

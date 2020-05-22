@@ -26,7 +26,8 @@ module.exports = (userEmail, userPassword, callback) => {
                 if(!isAuthenticated){
                     
                     count++
-                    const user = JSON.parse(json)
+                    debugger
+                    const user = JSON.parse(file)
 
                     const { email, password, id, name } = user
      
@@ -34,7 +35,7 @@ module.exports = (userEmail, userPassword, callback) => {
 
                         isAuthenticated = true                        
                         
-                        return callback(null, {name, id})
+                        return callback(null, {name, id},isAuthenticated)
 
                     } 
                 } if(count === files.length && !isAuthenticated)
