@@ -1,78 +1,75 @@
-const http = require('http')
-const fs = require('fs')
-const path = require('path')
+const express = require('express')
+const app = express()
 const listContacts = require('./logic/list-contacts')
-const searchContacts = require('./logic/search-contacts')
 const ListContacts = require('./components/ListContacts')
-const Landing = require('./components/Landing')
-const SearchContacts = require('./components/SearchContacts')
 const App = require('./components/App')
-const AddContact = require('./components/AddContact')
-const addContact = require('./logic/add-contact')
+const searchContact = require('./logic/search-contacts')
+const SearchContact = require('./components/SearchContacts')
+const Register = require('./components/Register')
+const registerUser = require('./logic/register-user')
+const Login = require('./components/Login')
+const loginUser=require('./logic/authenticate-user')
+const authenticateUser = require('./logic/authenticate-user')
+const Landing = require ('./components/Landing')
+const objetize = require('./helper/objetize')
+const Feedback = require('./components/Feedback')
 
+app.use(express.static('public'))
 
-const server = http.createServer((req, res) => {
-    const { url } = req
-
-    res.setHeader('content-type', 'text/html')
-    if (url === '/landing') {
-        res.end(App(Landing()))
-
-    }
-    if (url === '/contacts') {
+// app.get('/contacts', (req,res)=>{
+    
+//     listContacts((error, contacts) => {
+//         if (error) throw error 
         
-        listContacts((error, contacts) => {
-            if (error) throw error
+//         res.send(App(ListContacts(contacts)))
+//     })
+// })
+// app.get('/search', (req,res)=>{
+    
+//     const { url } = req
+//     if (!url.includes('?')){
+        
+//         res.send(App(SearchContact()))
+    
+//     } else {
+//         searchContact()
+//     }
+// })
 
-            res.end(App(ListContacts(contacts)))
-        })
-    } else if (url.startsWith('/search')) {
-        if (!url.includes('?')) {
-            res.end(App(SearchContacts()))
-        } else {
-            const [, queryString] = url.split('?')
-
-            const [, query] = queryString.split('=')
-
-            searchContacts(query, (error, contacts) => {
-                if (error) throw error
-
-                res.end(App(`${SearchContacts(query)}${ListContacts(contacts)}`))
-            })
-        }
-    } else if (url.startsWith('/add-contact')) {
-
-        if (url.includes('?')) {
-
-            [, value] = url.split('?')
-            const values = value.split("&")
-            const contact = {}
-            values.forEach(value => {
-                contact[value.split("=")[0]] = value.split('=')[1] 
-            })
-
-           contact.email = decodeURIComponent(contact.email)
-            addContact(contact, (error, id) => {
-                res.end(App(AddContact()))
-            })
-        } else {
-            debugger
-  
-            res.end(App(AddContact()))
-            
-        }
-
-    } else if (url === '/style.css') {
-        fs.readFile(path.join(__dirname, url), 'utf8', (error, content) => {
-            if (error) throw error
-
-            res.setHeader('Content-Type', 'text/css')
-
-            res.end(content)
-        })
-    } else {
-
-    }
+app.get('/landing', (req, res)=>{
+    res.send(App(Landing()))
 })
 
-server.listen(8080)
+app.get('/register', (req, res)=>{  debugger
+     res.send(App(Register()))
+    
+    })
+
+app.post('/register', (req,res)=>{ debugger
+    req.on('data', chunk=> { 
+        let obj = objetize(chunk)
+        
+        registerUser(obj,(error, id) => {
+            res.send(App(Feedback(`Contact ${obj.name} created!`)))
+        })
+    })
+})
+
+app.get('/login', (req, res) => res.send(App(Login())))
+
+app.post('/login', (req, res) => {
+    req.on("data", chunk =>{
+        let user = objetize(chunk)
+        const {email, password} = user
+        authenticateUser(email, password, (error, user)=>{ debugger
+            const {name} = user
+        
+            res.send(App(Feedback(`You are in ${name}`)))
+        })
+
+    })
+    
+})
+
+
+app.listen(8080)

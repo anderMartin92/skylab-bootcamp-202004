@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = callback => {
-    fs.readdir(path.join(__dirname, '..', 'data',"contacts"), (error, files) => {
+    fs.readdir(path.join(__dirname, '..', 'data', 'contacts'), (error, files) => {
         if (error) return callback(error)
 
         let wasError = false
