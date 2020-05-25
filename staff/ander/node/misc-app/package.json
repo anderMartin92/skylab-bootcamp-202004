@@ -6,19 +6,20 @@
   "scripts": {
     "start": "node .",
     "watch": "npx nodemon .",
+    "debug": "node debug .",
     "test": "npx mocha logic/*.spec.js",
-    "test: debug": "npx mocha debug logic/*.spec.js",
-    "style": "sass style.sass public/style.css"
+    "test:debug": "npx mocha debug logic/*.spec.js",
+    "style": "npx sass style.sass public/style.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
+    "express": "^4.17.1",
     "mocha": "^7.1.2",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "sass": "^1.26.5"
   }
 }

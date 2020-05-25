@@ -1,8 +1,17 @@
+require('../utils/string')
+const Email = require('../utils/email')
 const fs = require('fs')
+const uid = require('../utils/uid')
+require('../utils/function')
 const path = require('path')
+require('../utils/json')
+const { find } = require('../data/contacts')
+module.exports = (userId, callback) => {
+    const contacts = []
+    // TODO validate input fields
+    // TODO check user exists, otherwise error
 
-module.exports = callback => {
-    fs.readdir(path.join(__dirname, '..', 'data', 'contacts'), (error, files) => {
+    /* fs.readdir(path.join(__dirname, '..', 'data','contacts'), (error, files) => {
         if (error) return callback(error)
 
         let wasError = false
@@ -21,16 +30,26 @@ module.exports = callback => {
                     return
                 }
 
-                if (!wasError) {
+                if (!wasError) {debugger
                     const contact = JSON.parse(json)
 
                     contact.id = file.substring(0, file.indexOf('.json'))
-
-                    contacts.push(contact)
+                    if(contact.user === userId)
+                        contacts.push(contact)
 
                     if (contacts.length === files.length) callback(null, contacts)
                 }
             })
         })
+    }) */
+    user=userId
+    find({ user }, (error, _user) => {
+        if (error) return callback(error)
+                                
+        if (!user) return callback(new Error(`you dont have contacts!`))
+        
+        
+
+        callback(null, _user)
     })
 }

@@ -1,6 +1,6 @@
 module.exports = () =>{
     return `<section class="add-contact">
-    <form action="/add-contact" method="POST">
+    <form action="/home/addContact" method="POST">
         <input type="text" name="name" placeholder="John">
         <input type="text" name="surname" placeholder="Doe">
         <input type="email" name="email" placeholder="johndoe@mail.com">
@@ -11,3 +11,4 @@ module.exports = () =>{
 </form>
 </section>`
 }
+

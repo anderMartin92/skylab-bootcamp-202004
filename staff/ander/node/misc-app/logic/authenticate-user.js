@@ -1,48 +1,21 @@
-const path = require('path')
+require('../utils/string')
 const Email = require('../utils/email')
-const fs = require('fs')
-require ('../utils/string')
+require('../utils/function')
+const { find } = require('../data/users')
 
-module.exports = (userEmail, userPassword, callback) => {
-    
-    if(userEmail) {
-        String.validate.notVoid(userEmail)
-        Email.validate(userEmail)
-    }
+module.exports = (email, password, callback) => {
+    String.validate.notVoid(email)
+    Email.validate(email)
+    String.validate.notVoid(password)
+    Function.validate(callback)
 
-    if(userPassword){
-        String.validate.notVoid(userPassword)
-    }
+    find({ email }, (error, [user]) => {
+        if (error) return callback(error)
 
-    fs.readdir(path.join(__dirname, '..', 'data', 'users'), (error, files) =>{
-        if(error) return callback(error)
+        if (!user) return callback(new Error(`user with e-mail ${email} does not exist`))
 
-        let isAuthenticated = false
-        let count = 0
-        files.forEach(file => {
-            fs.readFile(path.join(__dirname, '..','data','users', file), 'utf8', (error, json) =>{ debugger
-                if(error) return callback(error)
-                   
-                if(!isAuthenticated){
-                    
-                    count++
-                    debugger
-                    const user = JSON.parse(file)
+        if (user.password !== password) return callback(new Error('wrong password'))
 
-                    const { email, password, id, name } = user
-     
-                    if (userEmail === email && userPassword === password){
-
-                        isAuthenticated = true                        
-                        
-                        return callback(null, {name, id},isAuthenticated)
-
-                    } 
-                } if(count === files.length && !isAuthenticated)
-                    return callback('Wrong credentials')
-            })
-        })
-        
+        callback(null, user.id)
     })
-
-}
+} 
